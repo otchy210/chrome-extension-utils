@@ -1,12 +1,12 @@
 {
   "name": "@otchy/chrome-extension-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Google Chrome extension utilities",
   "main": "lib/index.js",
   "bin": {
     "init-chrome-extension": "./bin/init.js",
-    "build-chrome-extension": "./bin/init.js",
-    "dist-chrome-extension": "./bin/init.js"
+    "build-chrome-extension": "./bin/build.js",
+    "dist-chrome-extension": "./bin/dist.js"
   },
   "scripts": {},
   "repository": {
