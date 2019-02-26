@@ -1,0 +1,28 @@
+{
+  "name": "@otchy/chrome-extension-utils",
+  "version": "0.0.1",
+  "description": "Google Chrome extension utilities",
+  "main": "lib/index.js",
+  "bin": {
+    "init-chrome-extension": "./bin/init.js",
+    "build-chrome-extension": "./bin/init.js",
+    "dist-chrome-extension": "./bin/init.js"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otchy210/chrome-extension-utils.git"
+  },
+  "author": "Toru Ochiai <npm@otchy.net> (https://twitter.com/otchy)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/otchy210/chrome-extension-utils/issues"
+  },
+  "homepage": "https://github.com/otchy210/chrome-extension-utils#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "json": "^9.0.6"
+  }
+}
