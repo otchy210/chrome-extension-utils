@@ -1,0 +1,28 @@
+{
+    "name": "change-me",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "change-me",
+    "icons": {
+        "16": "img/icon_16.png",
+        "48": "img/icon_48.png",
+        "128": "img/icon_128.png"
+    },
+    "permissions": [
+    ],
+    "content_scripts": [{
+        "matches": [ "http://*/*", "https://*/*" ],
+        "js": [ "js/page.js" ]
+    }],
+    "background": {
+        "scripts": ["js/background.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "img/icon_19.png"
+        },
+        "default_popup": "popup.html"
+    },
+    "options_page": "options.html"
+}

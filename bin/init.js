@@ -30,35 +30,42 @@ if (addScripts.length > 0) {
     );
 }
 
-// create webpack.config.js
-const webpackConfigJsFile = 'webpack.config.js';
-if (!fs.existsSync(`./${webpackConfigJsFile}`)) {
-    console.log(`Copying ${webpackConfigJsFile}`);
+// copy webpack.config.js
+const resourcesDir = (() => {
     const paths = __dirname.split('/');
     paths.pop();
     paths.push('resources');
-    const resourcesPath = paths.join('/');
-    const webpackConfigJs = fs.readFileSync(`${resourcesPath}/${webpackConfigJsFile}`);
-    fs.writeFileSync(`./${webpackConfigJsFile}`, webpackConfigJs);
-}
-
-// copy js template
-const mkdirp = './node_modules/mkdirp/bin/cmd.js';
-const srcJsPath = './src/js';
-console.log(exec(`${mkdirp} ${srcJsPath}`));
-const jsResourcesPath = (() => {
-    const paths = __dirname.split('/');
-    paths.pop();
-    paths.push('resources');
-    paths.push('js');
     return paths.join('/');
 })();
-['background.js', 'popup.js', 'options.js', 'page.js'].forEach(fileName => {
-    const srcFilePath = `${srcJsPath}/${fileName}`;
-    if (fs.existsSync(srcFilePath)) {
+(() => {
+    const fileName = 'webpack.config.js'
+    const destPath = `./${fileName}`;
+    if (fs.existsSync(destPath)) {
+        return;
+    }
+    const srcPath = `${resourcesDir}/${fileName}`;
+    console.log(`Copying ${fileName}`);
+    fs.copyFileSync(srcPath, destPath);
+})();
+
+// copy tempalte files
+const mkdirp = './node_modules/mkdirp/bin/cmd.js';
+exec(`${mkdirp} ./src/js`);
+exec(`${mkdirp} ./src/img`);
+[
+    'manifest.json',
+    'js/background.js',
+    'js/popup.js',
+    'js/options.js',
+    'js/page.js',
+    'popup.html',
+    'options.html',
+].forEach(filePath => {
+    const destPath = `./src/${filePath}`;
+    if (fs.existsSync(destPath)) {
         return true;
     }
-    console.log(`Copying ${fileName}`);
-    const fileContent = fs.readFileSync(`${jsResourcesPath}/${fileName}`);
-    fs.writeFileSync(srcFilePath, fileContent);
+    const srcPath = `${resourcesDir}/${filePath}`;
+    console.log(`Copying ${filePath}`);
+    fs.copyFileSync(srcPath, destPath);
 });
