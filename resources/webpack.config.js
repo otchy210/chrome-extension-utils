@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        popup: path.resolve('src/js/popup.js'),
         background: path.resolve('src/js/background.js'),
+        popup: path.resolve('src/js/popup.js'),
         options: path.resolve('src/js/options.js'),
         page: path.resolve('src/js/page.js'),
     },

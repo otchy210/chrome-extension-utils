@@ -7,7 +7,7 @@ const fs = require('fs');
 // install modules
 const packageJson = JSON.parse(fs.readFileSync('./package.json'));
 const requiredModules = [
-    'json', 'ncp', 'rmdir',
+    'json', 'ncp', 'rmdir', 'mkdirp',
     '@babel/core', '@babel/preset-env', 'babel-loader',
     'webpack', 'webpack-cli'
 ];
@@ -33,11 +33,32 @@ if (addScripts.length > 0) {
 // create webpack.config.js
 const webpackConfigJsFile = 'webpack.config.js';
 if (!fs.existsSync(`./${webpackConfigJsFile}`)) {
-    console.log(`Creating ${webpackConfigJsFile}`);
+    console.log(`Copying ${webpackConfigJsFile}`);
     const paths = __dirname.split('/');
     paths.pop();
     paths.push('resources');
-    const resourcesPath = `${paths.join('/')}`;
+    const resourcesPath = paths.join('/');
     const webpackConfigJs = fs.readFileSync(`${resourcesPath}/${webpackConfigJsFile}`);
     fs.writeFileSync(`./${webpackConfigJsFile}`, webpackConfigJs);
 }
+
+// copy js template
+const mkdirp = './node_modules/mkdirp/bin/cmd.js';
+const srcJsPath = './src/js';
+console.log(exec(`${mkdirp} ${srcJsPath}`));
+const jsResourcesPath = (() => {
+    const paths = __dirname.split('/');
+    paths.pop();
+    paths.push('resources');
+    paths.push('js');
+    return paths.join('/');
+})();
+['background.js', 'popup.js', 'options.js', 'page.js'].forEach(fileName => {
+    const srcFilePath = `${srcJsPath}/${fileName}`;
+    if (fs.existsSync(srcFilePath)) {
+        return true;
+    }
+    console.log(`Copying ${fileName}`);
+    const fileContent = fs.readFileSync(`${jsResourcesPath}/${fileName}`);
+    fs.writeFileSync(srcFilePath, fileContent);
+});

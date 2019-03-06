@@ -1,6 +1,6 @@
 {
   "name": "@otchy/chrome-extension-utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Google Chrome extension utilities",
   "main": "lib/index.js",
   "bin": {
