@@ -7,7 +7,7 @@ const fs = require('fs');
 // install modules
 const packageJson = JSON.parse(fs.readFileSync('./package.json'));
 const requiredModules = [
-    'json', 'ncp', 'rmdir', 'mkdirp',
+    'json', 'ncp', 'rmdir',
     '@babel/core', '@babel/preset-env', 'babel-loader',
     'webpack', 'webpack-cli'
 ];
@@ -49,9 +49,13 @@ const resourcesDir = (() => {
 })();
 
 // copy tempalte files
-const mkdirp = './node_modules/mkdirp/bin/cmd.js';
-exec(`${mkdirp} ./src/js`);
-exec(`${mkdirp} ./src/img`);
+['./src', './src/js', './src/img'].forEach(path => {
+    if (fs.existsSync(path)) {
+        return true;
+    }
+    console.log(`Creating ${path}`);
+    fs.mkdirSync(path);
+});
 [
     'manifest.json',
     'js/background.js',
@@ -60,6 +64,10 @@ exec(`${mkdirp} ./src/img`);
     'js/page.js',
     'popup.html',
     'options.html',
+    'img/icon_16.png',
+    'img/icon_19.png',
+    'img/icon_48.png',
+    'img/icon_128.png',
 ].forEach(filePath => {
     const destPath = `./src/${filePath}`;
     if (fs.existsSync(destPath)) {
