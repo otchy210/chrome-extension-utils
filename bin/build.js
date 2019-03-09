@@ -1,19 +1,49 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const ncp = require('ncp').ncp;
 
-['img', 'css', 'js'].forEach(dir => fs.mkdirSync(`build/${dir}`));
+// rm -rf ./build
+const rmrf = currDir => {
+    if (!fs.existsSync(currDir)) {
+        return;
+    }
+    fs.readdirSync(currDir).forEach(name => {
+        const path = `${currDir}/${name}`;
+        if (fs.statSync(path).isDirectory()) {
+            rmrf(path);
+        } else {
+            fs.unlinkSync(path);
+        }
+    });
+    fs.rmdirSync(currDir);
+};
+rmrf('./build');
 
-ncp('src/img', 'build/img', err => err && console.error(err));
-ncp('src/css', 'build/css', err => err && console.error(err));
+// cp -r src/(img|css)/* build/(img|css)/
+fs.mkdirSync('./build');
+const cpr = currDir => {
+    const srcDir = `./src/${currDir}`;
+    const destDir = `./build/${currDir}`;
+    fs.mkdirSync(destDir);
+    fs.readdirSync(srcDir).forEach(name => {
+        const srcPath = `${srcDir}/${name}`;
+        if (fs.statSync(srcPath).isDirectory()) {
+            cpr(`${currDir}/${name}`);
+        } else {
+            const destPath = `${destDir}/${name}`;
+            fs.copyFileSync(srcPath, destPath);
+        }
+    });
+};
+['img', 'css'].forEach(dir => cpr(dir));
 
-['manifest.json', 'popup.html', 'options.html', 'cropper.html', 'results.html'].forEach(file => {
-    fs.copyFileSync('src/' + file, 'build/' + file, err => err && console.error(err));
+// cp src/*.html build/*.html && cp src/manifest.json build/manifest.json
+fs.readdirSync('./src')
+    .filter(file => file.endsWith('.html') || file == 'manifest.json')
+    .forEach(file => {
+        fs.copyFileSync(`./src/${file}`, `./build/${file}`);
 });
 
-fs.copyFileSync(
-    'node_modules/milligram/dist/milligram.min.css',
-    'build/css/milligram.min.css',
-    err => err && console.error(err)
-);
+// webpack
+console.log('Running webpack')
+console.log(require('child_process').execSync('./node_modules/.bin/webpack').toString());

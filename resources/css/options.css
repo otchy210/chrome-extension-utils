@@ -1,0 +1,4 @@
+body::after {
+    display: block;
+    content: "inserted by options.css";
+}

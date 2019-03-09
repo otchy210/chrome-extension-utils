@@ -7,7 +7,7 @@ const fs = require('fs');
 // install modules
 const packageJson = JSON.parse(fs.readFileSync('./package.json'));
 const requiredModules = [
-    'json', 'ncp', 'rmdir',
+    'json',
     '@babel/core', '@babel/preset-env', 'babel-loader',
     'webpack', 'webpack-cli'
 ];
@@ -49,7 +49,7 @@ const resourcesDir = (() => {
 })();
 
 // copy tempalte files
-['./src', './src/js', './src/img'].forEach(path => {
+['./src', './src/js', './src/img', './src/css'].forEach(path => {
     if (fs.existsSync(path)) {
         return true;
     }
@@ -62,6 +62,8 @@ const resourcesDir = (() => {
     'js/popup.js',
     'js/options.js',
     'js/page.js',
+    'css/popup.css',
+    'css/options.css',
     'popup.html',
     'options.html',
     'img/icon_16.png',
