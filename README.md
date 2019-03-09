@@ -1,4 +1,4 @@
-# Chrome Excention Utilities
+# Chrome Extension Utils
 
 ## Get started
 ```
