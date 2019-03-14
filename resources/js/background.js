@@ -1,2 +1,2 @@
-const {Init} = require('@otchy/chrome-extension-utils');
-Init.background();
+const {Background} = require('@otchy/chrome-extension-utils');
+Background.init();

@@ -1,2 +1,1 @@
-const {Init} = require('@otchy/chrome-extension-utils');
-Init.page();
+console.log('page.js');
