@@ -51,7 +51,7 @@ Background.listenMessage('GREETING', params => {
 ```
 
 ```js
-// options.js
+// options.js -- you can do same thing in popup.js and page.js
 const {Message} = require('@otchy/chrome-extension-utils');
 
 (async () => {
