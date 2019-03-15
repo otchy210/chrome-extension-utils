@@ -46,7 +46,7 @@ const {Background} = require('@otchy/chrome-extension-utils');
 Background.listenMessage('GREETING', params => {
     const {greeting, name} = params;
     console.log(greeting); // "I'm options.js"
-    return {greeting: `Hello ${name}!`};
+    return {greeting: `Hello, ${name}!`};
 });
 ```
 
@@ -57,7 +57,7 @@ const {Message} = require('@otchy/chrome-extension-utils');
 (async () => {
     const name = 'options.js';
     const {greeting} = await Message.send('GREETING', {greeting: `I'm ${name}`, name});
-    console.log(greeting); // "Hello option.js!"
+    console.log(greeting); // "Hello, options.js!"
 })();
 ```
 
