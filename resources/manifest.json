@@ -9,6 +9,10 @@
         "128": "img/icon_128.png"
     },
     "permissions": [
+        "tabs",
+        "storage",
+        "http://*/*",
+        "https://*/*"
     ],
     "content_scripts": [{
         "matches": [ "http://*/*", "https://*/*" ],
