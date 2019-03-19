@@ -78,7 +78,7 @@ const {SyncStorage} = require('@otchy/chrome-extension-utils');
 
 ### LocalStorage
 
-Wrapper of `chrome.storage.local`. The storage is stored in your local machine, but it's not synced via network. Tnis is permanent, so you can keep it even you close all Chrome sessions.
+Wrapper of `chrome.storage.local`. The storage is stored in your local machine, but it's not synced via network. This is permanent, so you can keep it even you close all Chrome sessions.
 
 ```js
 const {LocalStorage} = require('@otchy/chrome-extension-utils');
