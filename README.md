@@ -104,3 +104,33 @@ const {SessionStorage} = require('@otchy/chrome-extension-utils');
     SessionStorage.set('counter', count + 1);
 })();
 ```
+
+### Tabs
+Wrapper of `chrome.tabs.*`. It also has some handy utilities.
+
+```js
+(async () => {
+    // get current active tab
+    const tab = await Tabs.getCurrent();
+
+    // open new tab
+    const newTab = await Tabs.openNew('https://www.google.com');
+    const newTabButInactive = await Tabs.openNew('https://www.google.com', false);
+
+    // activate existing tab
+    Tabs.activate(tab.id).then(tab => {
+        // do something
+    });
+
+    // close existing tab
+    Tabs.close(tab.id).then(() => {
+        // do something
+    });
+
+    // capture visible area of active tab as dataUrl of png
+    const dataUrl = await Tabs.captureVisibleTab();
+
+    // capture visible area of active tab as canvas
+    const canvas = await Tabs.captureVisibleTabAsCanvas();
+})
+```
