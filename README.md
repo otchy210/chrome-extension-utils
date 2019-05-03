@@ -19,7 +19,13 @@ This command will setup your directory for brand new chrome extension.
 ```
 $ npm run build
 ```
-This command is basically alias of `build-chrome-extension` and will build your extension under `build` directory. So that you can load the directory as Chrome Extension from `chrome://extensions` page.
+This command is alias of `build-chrome-extension`. It will build your extension under `build` directory. So that you can load the directory as Chrome Extension from `chrome://extensions` page.
+
+## Distribute your extension
+```
+$ npm run dist
+```
+This command is alias of `dist-chrome-extension`. It will package your `build` directory and save it under `dist` directory as zip file. You can upload the zip file via [Chrome Web Store developer dashboard](https://chrome.google.com/webstore/developer/dashboard) as a public Chrome extension.
 
 ## Modules
 
