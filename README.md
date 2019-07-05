@@ -54,6 +54,9 @@ Background.listenMessage('GREETING', params => {
     console.log(greeting); // "I'm options.js"
     return {greeting: `Hello, ${name}!`};
 });
+
+// You can unlisten it as well
+// Background.unlistenMessage('GREETING');
 ```
 
 ```js
@@ -79,6 +82,9 @@ const {SyncStorage} = require('@otchy/chrome-extension-utils');
     // How many times you call this logic among all Chrome browsers with your extension
     console.log(count);
     SyncStorage.set('counter', count + 1);
+
+    // You can remove it as well
+    // SyncStorage.remove('counter');
 })();
 ```
 
@@ -94,6 +100,9 @@ const {LocalStorage} = require('@otchy/chrome-extension-utils');
     // How many times you call this logic on your local Chrome browser with your extension
     console.log(count);
     LocalStorage.set('counter', count + 1);
+
+    // You can remove it as well
+    // LocalStorage.remove('counter');
 })();
 ```
 
@@ -108,6 +117,9 @@ const {SessionStorage} = require('@otchy/chrome-extension-utils');
     // How many times you call this logic after you open current Chrome session
     console.log(count);
     SessionStorage.set('counter', count + 1);
+
+    // You can remove it as well
+    // SessionStorage.remove('counter');
 })();
 ```
 
@@ -138,5 +150,12 @@ Wrapper of `chrome.tabs.*`. It also has some handy utilities.
 
     // capture visible area of active tab as canvas
     const canvas = await Tabs.captureVisibleTabAsCanvas();
+
+    // get information in the window object of certain tab
+    const win = await Tabs.getWindowInfo(tab.id, 'location.href', 'scrollX', 'scroolY');
+    console.log(win['location.href'], win.scroolX, win.scroolY);
+    // NOTE: Tabs.getWindowInfo(tab.id, 'location') does work.
+    // But all propertis in the location object will be read-only due to security reason.
+    // Meaning, win.location.href = 'new url'; doesn't work.
 })
 ```
