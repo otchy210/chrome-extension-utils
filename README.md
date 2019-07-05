@@ -152,8 +152,8 @@ Wrapper of `chrome.tabs.*`. It also has some handy utilities.
     const canvas = await Tabs.captureVisibleTabAsCanvas();
 
     // get information in the window object of certain tab
-    const win = await Tabs.getWindowInfo(tab.id, 'location.href', 'scrollX', 'scroolY');
-    console.log(win['location.href'], win.scroolX, win.scroolY);
+    const win = await Tabs.getWindowInfo(tab.id, 'location.href', 'scrollX', 'scrollY');
+    console.log(win['location.href'], win.scrollX, win.scrollY);
     // NOTE: Tabs.getWindowInfo(tab.id, 'location') does work.
     // But all propertis in the location object will be read-only due to security reason.
     // Meaning, win.location.href = 'new url'; doesn't work.
