@@ -145,6 +145,9 @@ Wrapper of `chrome.tabs.*`. It also has some handy utilities.
         // do something
     });
 
+    // close current tab
+    Tabs.closeCurrent();
+
     // capture visible area of active tab as dataUrl of png
     const dataUrl = await Tabs.captureVisibleTab();
 
