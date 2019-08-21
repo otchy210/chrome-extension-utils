@@ -123,6 +123,16 @@ const {SessionStorage} = require('@otchy/chrome-extension-utils');
 })();
 ```
 
+### Window
+Wrapper of `chrome.windows.*`.
+
+```js
+(async () => {
+    // get current active window
+    const win = await Windows.getCurrent();
+})
+```
+
 ### Tabs
 Wrapper of `chrome.tabs.*`. It also has some handy utilities.
 
